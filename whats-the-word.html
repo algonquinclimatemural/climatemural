@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Climate Change Mural</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <style>
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .popup-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .popup-close:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <header>
+          <p><br></p>
+        </header>
+
+        <section>
+          <div class="box alt">
+            <div class="row gtr-uniform">
+              <div class="col-12">
+                <span class="image fit"><img src="images/pic13.jpg" alt="Climate Change Mural" /></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+                <section>
+  <label for="userInput">What's the word? (7 characters):</label>
+  <input type="text" id="userInput" placeholder="Enter the word you found in the maze..." maxlength="7" />
+    <p><br></p>
+  <div id="charCount" class="align-center"><h2>0 / 7</h2></div>
+  <button class="button primary fit" id="checkInput">Submit</button>
+  </section>
+
+      </div>
+    </div>
+
+    <!-- Popup 1 -->
+    <div id="popup1" class="popup-overlay">
+      <div class="popup-box">
+        <span class="popup-close">&times;</span>
+        <div class="inner">
+							<h1>Generic Page</h1>
+							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
+							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
+						<ul class="actions stacked">
+								<li><a href="#" class="button fit">Default</a></li>
+						</ul>
+						</div>
+      </div>
+    </div>
+
+    <!-- Popup 2 -->
+    <div id="popup2" class="popup-overlay">
+      <div class="popup-box">
+        <span class="popup-close">&times;</span>
+        <h1>Generic Page</h1>
+							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
+							
+        <p>⚠️ That input does not match.⚠️</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <header class="major align-center">
+          <h2>Meet the Artist</h2>
+          <p><br></p>
+        </header>
+
+        <div id="Tab2" class="align-center">
+          <h3>Rebecca Dmello</h3>
+          <p>Sed nisl arcu euismod sit amet nisi lorem</p>
+          <ul class="icons">
+            <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+          </ul>
+        </div>
+
+        <ul class="copyright">
+          <li><a href="index.html">Back to homepage</a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const inputField = document.getElementById('userInput');
+      const checkBtn = document.getElementById('checkInput');
+      const charCount = document.getElementById('charCount');
+      const maxChars = 7;
+      const correctKeyword = 'compost';
+
+      const popup1 = document.getElementById('popup1');
+      const popup2 = document.getElementById('popup2');
+
+      function showPopup(popup) {
+        popup.style.display = 'flex';
+      }
+
+      function closePopups() {
+        popup1.style.display = 'none';
+        popup2.style.display = 'none';
+      }
+
+      document.querySelectorAll('.popup-close').forEach(btn => {
+        btn.addEventListener('click', closePopups);
+      });
+
+      [popup1, popup2].forEach(popup => {
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) closePopups();
+        });
+      });
+
+      inputField.addEventListener('input', () => {
+  if (inputField.value.length > maxChars) {
+    inputField.value = inputField.value.slice(0, maxChars);
+  }
+
+  // Update the content inside the <h2> element
+  const countDisplay = charCount.querySelector('h2');
+  countDisplay.textContent = `${inputField.value.length} / ${maxChars}`;
+});
+
+
+      function checkInputValue() {
+        const userValue = inputField.value.trim().toLowerCase();
+        if (userValue === correctKeyword.toLowerCase()) {
+          showPopup(popup1);
+        } else {
+          showPopup(popup2);
+        }
+      }
+
+      checkBtn.addEventListener('click', checkInputValue);
+
+      inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          checkInputValue();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
